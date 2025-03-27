@@ -9,9 +9,12 @@ export default createConfig({
 		connectionString: process.env.DATABASE_URL,
 		poolConfig: {
 			max: Number(process.env.DATABASE_MAX_CONNECTION ?? 5),
-			ssl: {
-				rejectUnauthorized: false,
-			},
+			ssl:
+				process.env.DATABASE_SSL === "false"
+					? undefined
+					: {
+							rejectUnauthorized: false,
+					  },
 		},
 	},
 	networks: {
