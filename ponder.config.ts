@@ -4,6 +4,13 @@ import { erc20ABI } from "./abis/erc20ABI";
 
 export default createConfig({
 	ordering: "multichain",
+	database: {
+		kind: "postgres",
+		connectionString: process.env.DATABASE_URL,
+		poolConfig: {
+			max: 10,
+		},
+	},
 	networks: {
 		// mainnet: {
 		// 	chainId: 1,
