@@ -8,7 +8,7 @@ export default createConfig({
 		kind: "postgres",
 		connectionString: process.env.DATABASE_URL,
 		poolConfig: {
-			max: Number(process.env.DATABASE_MAX_CONNECTION ?? 5),
+			max: Number(process.env.DATABASE_MAX_CONNECTION || 5),
 			ssl:
 				process.env.DATABASE_SSL === "false"
 					? undefined
@@ -70,15 +70,21 @@ export default createConfig({
 				// 		"0xdac17f958d2ee523a2206206994597c13d831ec7", // USDT
 				// 		"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", // USDC
 				// 	],
-				// 	startBlock: 22133577,
+				// 	startBlock: !!process.env.PONDER_START_BLOCK_1
+				// 		? Number(process.env.PONDER_START_BLOCK_1)
+				// 		: "latest",
 				// },
 				sepolia: {
 					address: ["0xf0e5aad1cbf9cd06ae87c4b7a6ed7dca3ad3e060"],
-					startBlock: 7985396,
+					startBlock: !!process.env.PONDER_START_BLOCK_11155111
+						? Number(process.env.PONDER_START_BLOCK_11155111)
+						: "latest",
 				},
 				bscTestnet: {
 					address: ["0x2b9eB145A7B94f4cdEBf363c78752095a2C9bE80"],
-					startBlock: 49431538,
+					startBlock: !!process.env.PONDER_START_BLOCK_97
+						? Number(process.env.PONDER_START_BLOCK_97)
+						: "latest",
 				},
 			},
 		},
