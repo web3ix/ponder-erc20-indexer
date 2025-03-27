@@ -8,7 +8,10 @@ export default createConfig({
 		kind: "postgres",
 		connectionString: process.env.DATABASE_URL,
 		poolConfig: {
-			max: 10,
+			max: Number(process.env.DATABASE_MAX_CONNECTION ?? 5),
+			ssl: {
+				rejectUnauthorized: false,
+			},
 		},
 	},
 	networks: {
