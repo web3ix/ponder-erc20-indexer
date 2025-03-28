@@ -57,7 +57,7 @@ if (process.env.PONDER_NETWORK_ENABLE_11155111 === "true") {
 	};
 }
 
-if (process.env.PONDER_NETWORK_ENABLE_11155111 === "true") {
+if (process.env.PONDER_NETWORK_ENABLE_97 === "true") {
 	networks["bscTestnet"] = {
 		chainId: 97,
 		transport: loadBalance([
