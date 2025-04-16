@@ -1,5 +1,5 @@
 {
-  "name": "index-transfer",
+  "name": "p2p_erc20_indexer",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "ponder": "^0.10.6",
+    "ponder": "^0.10.14",
     "drizzle-kit": "0.22.8",
     "hono": "^4.5.0",
     "viem": "^2.21.3"
