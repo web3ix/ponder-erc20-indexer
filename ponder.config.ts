@@ -42,7 +42,7 @@ process.env.PONDER_NETWORK_CHAIN_IDS_SUPPORTED?.split(",").forEach(
 export default createConfig({
 	ordering: "multichain",
 	database:
-		process.env.PONDER_DB_KIND === "postgres"
+		process.env.DATABASE_KIND === "postgres"
 			? {
 					kind: "postgres",
 					connectionString: process.env.DATABASE_URL,
