@@ -12,7 +12,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "ponder": "^0.10.14",
+    "ponder": "^0.10.25",
     "drizzle-kit": "0.22.8",
     "hono": "^4.5.0",
     "viem": "^2.21.3"
