@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ponder-erc20-indexer
+    image: 0xmanhtrv/ponder-erc20-indexer:0.0.1
+    environment:
+      - PONDER_NETWORK_CHAIN_IDS_SUPPORTED=11155111
+      - PONDER_NETWORK_ENABLE_11155111=true
+      - PONDER_NETWORK_KEY_11155111=sepolia
+      - PONDER_RPC_URL_11155111=
+      - PONDER_WSS_URL_11155111=wss://ethereum-sepolia-rpc.publicnode.com
+      - PONDER_RATELIMIT_RPC_URL_11155111=https://api.zan.top/eth-sepolia,https://sepolia.drpc.org,https://ethereum-sepolia-rpc.publicnode.com
+      - PONDER_START_BLOCK_11155111=8129183
+      - PONDER_ERC20_CONTRACTS_11155111=0xf0e5aad1cbf9cd06ae87c4b7a6ed7dca3ad3e060
+      - DATABASE_SCHEMA=public
+    ports:
+      - "42069:42069"
+    restart: unless-stopped
+    networks:
+      - ponder-erc20-indexer-network
+
+networks:
+  ponder-erc20-indexer-network:
+    driver: bridge

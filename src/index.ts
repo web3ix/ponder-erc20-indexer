@@ -4,7 +4,7 @@ import { transfer } from "ponder:schema";
 ponder.on("ERC20:Transfer", async ({ event, context }) => {
 	await context.db.insert(transfer).values({
 		id: event.id,
-		chainId: context.network.chainId,
+		chainId: (context.chain as any).id,
 		txHash: event.transaction.hash,
 		blockNumber: event.block.number,
 		token: event.log.address,

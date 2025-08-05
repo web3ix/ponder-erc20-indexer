@@ -1,17 +1,17 @@
-import { createConfig, loadBalance, rateLimit, NetworkConfig } from "ponder";
+import { createConfig, loadBalance, rateLimit, ChainConfig } from "ponder";
 import { http, webSocket, Transport } from "viem";
 import { erc20ABI } from "./abis/erc20ABI";
 
-let networks: { [key: string]: NetworkConfig } = {};
+let chains: { [key: string]: ChainConfig } = {};
 
-let erc20ContractsNetwork: any = {};
+let erc20Chains: any = {};
 
 process.env.PONDER_NETWORK_CHAIN_IDS_SUPPORTED?.split(",").forEach(
 	(chainId) => {
 		if (process.env[`PONDER_NETWORK_ENABLE_${chainId}`] === "true") {
-			networks[process.env[`PONDER_NETWORK_KEY_${chainId}`]!] = {
-				chainId: +chainId,
-				transport: loadBalance([
+			chains[process.env[`PONDER_NETWORK_KEY_${chainId}`]!] = {
+				id: +chainId,
+				rpc: loadBalance([
 					...(process.env[`PONDER_NETWORK_KEY_${chainId}`]
 						?.split(",")
 						.filter((el) => !!el)
@@ -28,7 +28,7 @@ process.env.PONDER_NETWORK_CHAIN_IDS_SUPPORTED?.split(",").forEach(
 				]),
 			};
 
-			erc20ContractsNetwork[process.env[`PONDER_NETWORK_KEY_${chainId}`]!] = {
+			erc20Chains[process.env[`PONDER_NETWORK_KEY_${chainId}`]!] = {
 				address:
 					process.env[`PONDER_ERC20_CONTRACTS_${chainId}`]?.split(",") || [],
 				startBlock: !!process.env[`PONDER_START_BLOCK_${chainId}`]
@@ -59,11 +59,11 @@ export default createConfig({
 			: {
 					kind: "pglite",
 			  },
-	networks,
+	chains,
 	contracts: {
 		ERC20: {
 			abi: erc20ABI,
-			network: erc20ContractsNetwork,
+			chain: erc20Chains,
 		},
 	},
 });
